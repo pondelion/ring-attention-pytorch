@@ -60,7 +60,7 @@ def default_attention(
 
     if causal:
         i, j = sim.shape[-2:]
-        causal_mask = torch.ones((i, j), dtype = torch.bool).triu(j - i + 1)
+        causal_mask = torch.ones((i, j), dtype = torch.bool).triu(j - i + 1).to(sim.device)
         sim = torch.where(causal_mask, mask_value, sim)
 
     elif exists(mask):
